@@ -1,0 +1,3662 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> class_list
+Rule 2     class_list -> class_list class SEMICOLON
+Rule 3     class_list -> class SEMICOLON
+Rule 4     class -> CLASS TYPE LBRACE features_list_opt RBRACE
+Rule 5     class -> CLASS TYPE INHERITS TYPE LBRACE features_list_opt RBRACE
+Rule 6     features_list_opt -> features_list
+Rule 7     features_list_opt -> empty
+Rule 8     features_list -> features_list feature SEMICOLON
+Rule 9     features_list -> feature SEMICOLON
+Rule 10    feature -> ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE
+Rule 11    feature -> ID LPAREN RPAREN COLON TYPE LBRACE expression RBRACE
+Rule 12    feature -> ID COLON TYPE ASSIGN expression
+Rule 13    feature -> ID COLON TYPE
+Rule 14    formal_params_list -> formal_params_list COMMA formal_param
+Rule 15    formal_params_list -> formal_param
+Rule 16    formal_param -> ID COLON TYPE
+Rule 17    expression -> ID
+Rule 18    expression -> INTEGER
+Rule 19    expression -> BOOLEAN
+Rule 20    expression -> STRING
+Rule 21    expression -> SELF
+Rule 22    expression -> LBRACE block_list RBRACE
+Rule 23    block_list -> block_list expression SEMICOLON
+Rule 24    block_list -> expression SEMICOLON
+Rule 25    expression -> ID ASSIGN expression
+Rule 26    expression -> expression DOT ID LPAREN arguments_list_opt RPAREN
+Rule 27    arguments_list_opt -> arguments_list
+Rule 28    arguments_list_opt -> empty
+Rule 29    arguments_list -> arguments_list COMMA expression
+Rule 30    arguments_list -> expression
+Rule 31    expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+Rule 32    expression -> ID LPAREN arguments_list_opt RPAREN
+Rule 33    expression -> expression PLUS expression
+Rule 34    expression -> expression MINUS expression
+Rule 35    expression -> expression MULTIPLY expression
+Rule 36    expression -> expression DIVIDE expression
+Rule 37    expression -> expression LT expression
+Rule 38    expression -> expression LTEQ expression
+Rule 39    expression -> expression EQ expression
+Rule 40    expression -> LPAREN expression RPAREN
+Rule 41    expression -> IF expression THEN expression ELSE expression FI
+Rule 42    expression -> WHILE expression LOOP expression POOL
+Rule 43    expression -> let_expression
+Rule 44    let_expression -> LET let_variables_list IN expression
+Rule 45    let_variables_list -> let_variables_list COMMA let_variable
+Rule 46    let_variables_list -> let_variable
+Rule 47    let_variable -> ID COLON TYPE
+Rule 48    let_variable -> ID COLON TYPE ASSIGN expression
+Rule 49    expression -> CASE expression OF actions_list ESAC
+Rule 50    actions_list -> actions_list action
+Rule 51    actions_list -> action
+Rule 52    action -> ID COLON TYPE ARROW expression SEMICOLON
+Rule 53    expression -> NEW TYPE
+Rule 54    expression -> ISVOID expression
+Rule 55    expression -> INT_COMP expression
+Rule 56    expression -> NOT expression
+Rule 57    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ARROW                : 52
+ASSIGN               : 12 25 48
+AT                   : 31
+BOOLEAN              : 19
+CASE                 : 49
+CLASS                : 4 5
+COLON                : 10 11 12 13 16 47 48 52
+COMMA                : 14 29 45
+DIVIDE               : 36
+DOT                  : 26 31
+ELSE                 : 41
+EQ                   : 39
+ESAC                 : 49
+FI                   : 41
+ID                   : 10 11 12 13 16 17 25 26 31 32 47 48 52
+IF                   : 41
+IN                   : 44
+INHERITS             : 5
+INTEGER              : 18
+INT_COMP             : 55
+ISVOID               : 54
+LBRACE               : 4 5 10 11 22
+LET                  : 44
+LOOP                 : 42
+LPAREN               : 10 11 26 31 32 40
+LT                   : 37
+LTEQ                 : 38
+MINUS                : 34
+MULTIPLY             : 35
+NEW                  : 53
+NOT                  : 56
+OF                   : 49
+PLUS                 : 33
+POOL                 : 42
+RBRACE               : 4 5 10 11 22
+RPAREN               : 10 11 26 31 32 40
+SELF                 : 21
+SEMICOLON            : 2 3 8 9 23 24 52
+STRING               : 20
+THEN                 : 41
+TYPE                 : 4 5 5 10 11 12 13 16 31 47 48 52 53
+WHILE                : 42
+error                : 
+
+Nonterminals, with rules where they appear
+
+action               : 50 51
+actions_list         : 49 50
+arguments_list       : 27 29
+arguments_list_opt   : 26 31 32
+block_list           : 22 23
+class                : 2 3
+class_list           : 1 2
+empty                : 7 28
+expression           : 10 11 12 23 24 25 26 29 30 31 33 33 34 34 35 35 36 36 37 37 38 38 39 39 40 41 41 41 42 42 44 48 49 52 54 55 56
+feature              : 8 9
+features_list        : 6 8
+features_list_opt    : 4 5
+formal_param         : 14 15
+formal_params_list   : 10 14
+let_expression       : 43
+let_variable         : 45 46
+let_variables_list   : 44 45
+program              : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . class_list
+    (2) class_list -> . class_list class SEMICOLON
+    (3) class_list -> . class SEMICOLON
+    (4) class -> . CLASS TYPE LBRACE features_list_opt RBRACE
+    (5) class -> . CLASS TYPE INHERITS TYPE LBRACE features_list_opt RBRACE
+
+    CLASS           shift and go to state 4
+
+    program                        shift and go to state 1
+    class_list                     shift and go to state 2
+    class                          shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> class_list .
+    (2) class_list -> class_list . class SEMICOLON
+    (4) class -> . CLASS TYPE LBRACE features_list_opt RBRACE
+    (5) class -> . CLASS TYPE INHERITS TYPE LBRACE features_list_opt RBRACE
+
+    $end            reduce using rule 1 (program -> class_list .)
+    CLASS           shift and go to state 4
+
+    class                          shift and go to state 5
+
+state 3
+
+    (3) class_list -> class . SEMICOLON
+
+    SEMICOLON       shift and go to state 6
+
+
+state 4
+
+    (4) class -> CLASS . TYPE LBRACE features_list_opt RBRACE
+    (5) class -> CLASS . TYPE INHERITS TYPE LBRACE features_list_opt RBRACE
+
+    TYPE            shift and go to state 7
+
+
+state 5
+
+    (2) class_list -> class_list class . SEMICOLON
+
+    SEMICOLON       shift and go to state 8
+
+
+state 6
+
+    (3) class_list -> class SEMICOLON .
+
+    CLASS           reduce using rule 3 (class_list -> class SEMICOLON .)
+    $end            reduce using rule 3 (class_list -> class SEMICOLON .)
+
+
+state 7
+
+    (4) class -> CLASS TYPE . LBRACE features_list_opt RBRACE
+    (5) class -> CLASS TYPE . INHERITS TYPE LBRACE features_list_opt RBRACE
+
+    LBRACE          shift and go to state 9
+    INHERITS        shift and go to state 10
+
+
+state 8
+
+    (2) class_list -> class_list class SEMICOLON .
+
+    CLASS           reduce using rule 2 (class_list -> class_list class SEMICOLON .)
+    $end            reduce using rule 2 (class_list -> class_list class SEMICOLON .)
+
+
+state 9
+
+    (4) class -> CLASS TYPE LBRACE . features_list_opt RBRACE
+    (6) features_list_opt -> . features_list
+    (7) features_list_opt -> . empty
+    (8) features_list -> . features_list feature SEMICOLON
+    (9) features_list -> . feature SEMICOLON
+    (57) empty -> .
+    (10) feature -> . ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE
+    (11) feature -> . ID LPAREN RPAREN COLON TYPE LBRACE expression RBRACE
+    (12) feature -> . ID COLON TYPE ASSIGN expression
+    (13) feature -> . ID COLON TYPE
+
+    RBRACE          reduce using rule 57 (empty -> .)
+    ID              shift and go to state 15
+
+    features_list_opt              shift and go to state 11
+    features_list                  shift and go to state 12
+    empty                          shift and go to state 13
+    feature                        shift and go to state 14
+
+state 10
+
+    (5) class -> CLASS TYPE INHERITS . TYPE LBRACE features_list_opt RBRACE
+
+    TYPE            shift and go to state 16
+
+
+state 11
+
+    (4) class -> CLASS TYPE LBRACE features_list_opt . RBRACE
+
+    RBRACE          shift and go to state 17
+
+
+state 12
+
+    (6) features_list_opt -> features_list .
+    (8) features_list -> features_list . feature SEMICOLON
+    (10) feature -> . ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE
+    (11) feature -> . ID LPAREN RPAREN COLON TYPE LBRACE expression RBRACE
+    (12) feature -> . ID COLON TYPE ASSIGN expression
+    (13) feature -> . ID COLON TYPE
+
+    RBRACE          reduce using rule 6 (features_list_opt -> features_list .)
+    ID              shift and go to state 15
+
+    feature                        shift and go to state 18
+
+state 13
+
+    (7) features_list_opt -> empty .
+
+    RBRACE          reduce using rule 7 (features_list_opt -> empty .)
+
+
+state 14
+
+    (9) features_list -> feature . SEMICOLON
+
+    SEMICOLON       shift and go to state 19
+
+
+state 15
+
+    (10) feature -> ID . LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE
+    (11) feature -> ID . LPAREN RPAREN COLON TYPE LBRACE expression RBRACE
+    (12) feature -> ID . COLON TYPE ASSIGN expression
+    (13) feature -> ID . COLON TYPE
+
+    LPAREN          shift and go to state 20
+    COLON           shift and go to state 21
+
+
+state 16
+
+    (5) class -> CLASS TYPE INHERITS TYPE . LBRACE features_list_opt RBRACE
+
+    LBRACE          shift and go to state 22
+
+
+state 17
+
+    (4) class -> CLASS TYPE LBRACE features_list_opt RBRACE .
+
+    SEMICOLON       reduce using rule 4 (class -> CLASS TYPE LBRACE features_list_opt RBRACE .)
+
+
+state 18
+
+    (8) features_list -> features_list feature . SEMICOLON
+
+    SEMICOLON       shift and go to state 23
+
+
+state 19
+
+    (9) features_list -> feature SEMICOLON .
+
+    ID              reduce using rule 9 (features_list -> feature SEMICOLON .)
+    RBRACE          reduce using rule 9 (features_list -> feature SEMICOLON .)
+
+
+state 20
+
+    (10) feature -> ID LPAREN . formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE
+    (11) feature -> ID LPAREN . RPAREN COLON TYPE LBRACE expression RBRACE
+    (14) formal_params_list -> . formal_params_list COMMA formal_param
+    (15) formal_params_list -> . formal_param
+    (16) formal_param -> . ID COLON TYPE
+
+    RPAREN          shift and go to state 26
+    ID              shift and go to state 24
+
+    formal_params_list             shift and go to state 25
+    formal_param                   shift and go to state 27
+
+state 21
+
+    (12) feature -> ID COLON . TYPE ASSIGN expression
+    (13) feature -> ID COLON . TYPE
+
+    TYPE            shift and go to state 28
+
+
+state 22
+
+    (5) class -> CLASS TYPE INHERITS TYPE LBRACE . features_list_opt RBRACE
+    (6) features_list_opt -> . features_list
+    (7) features_list_opt -> . empty
+    (8) features_list -> . features_list feature SEMICOLON
+    (9) features_list -> . feature SEMICOLON
+    (57) empty -> .
+    (10) feature -> . ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE
+    (11) feature -> . ID LPAREN RPAREN COLON TYPE LBRACE expression RBRACE
+    (12) feature -> . ID COLON TYPE ASSIGN expression
+    (13) feature -> . ID COLON TYPE
+
+    RBRACE          reduce using rule 57 (empty -> .)
+    ID              shift and go to state 15
+
+    features_list_opt              shift and go to state 29
+    features_list                  shift and go to state 12
+    empty                          shift and go to state 13
+    feature                        shift and go to state 14
+
+state 23
+
+    (8) features_list -> features_list feature SEMICOLON .
+
+    ID              reduce using rule 8 (features_list -> features_list feature SEMICOLON .)
+    RBRACE          reduce using rule 8 (features_list -> features_list feature SEMICOLON .)
+
+
+state 24
+
+    (16) formal_param -> ID . COLON TYPE
+
+    COLON           shift and go to state 30
+
+
+state 25
+
+    (10) feature -> ID LPAREN formal_params_list . RPAREN COLON TYPE LBRACE expression RBRACE
+    (14) formal_params_list -> formal_params_list . COMMA formal_param
+
+    RPAREN          shift and go to state 31
+    COMMA           shift and go to state 32
+
+
+state 26
+
+    (11) feature -> ID LPAREN RPAREN . COLON TYPE LBRACE expression RBRACE
+
+    COLON           shift and go to state 33
+
+
+state 27
+
+    (15) formal_params_list -> formal_param .
+
+    RPAREN          reduce using rule 15 (formal_params_list -> formal_param .)
+    COMMA           reduce using rule 15 (formal_params_list -> formal_param .)
+
+
+state 28
+
+    (12) feature -> ID COLON TYPE . ASSIGN expression
+    (13) feature -> ID COLON TYPE .
+
+    ASSIGN          shift and go to state 34
+    SEMICOLON       reduce using rule 13 (feature -> ID COLON TYPE .)
+
+
+state 29
+
+    (5) class -> CLASS TYPE INHERITS TYPE LBRACE features_list_opt . RBRACE
+
+    RBRACE          shift and go to state 35
+
+
+state 30
+
+    (16) formal_param -> ID COLON . TYPE
+
+    TYPE            shift and go to state 36
+
+
+state 31
+
+    (10) feature -> ID LPAREN formal_params_list RPAREN . COLON TYPE LBRACE expression RBRACE
+
+    COLON           shift and go to state 37
+
+
+state 32
+
+    (14) formal_params_list -> formal_params_list COMMA . formal_param
+    (16) formal_param -> . ID COLON TYPE
+
+    ID              shift and go to state 24
+
+    formal_param                   shift and go to state 38
+
+state 33
+
+    (11) feature -> ID LPAREN RPAREN COLON . TYPE LBRACE expression RBRACE
+
+    TYPE            shift and go to state 39
+
+
+state 34
+
+    (12) feature -> ID COLON TYPE ASSIGN . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 41
+    let_expression                 shift and go to state 50
+
+state 35
+
+    (5) class -> CLASS TYPE INHERITS TYPE LBRACE features_list_opt RBRACE .
+
+    SEMICOLON       reduce using rule 5 (class -> CLASS TYPE INHERITS TYPE LBRACE features_list_opt RBRACE .)
+
+
+state 36
+
+    (16) formal_param -> ID COLON TYPE .
+
+    RPAREN          reduce using rule 16 (formal_param -> ID COLON TYPE .)
+    COMMA           reduce using rule 16 (formal_param -> ID COLON TYPE .)
+
+
+state 37
+
+    (10) feature -> ID LPAREN formal_params_list RPAREN COLON . TYPE LBRACE expression RBRACE
+
+    TYPE            shift and go to state 57
+
+
+state 38
+
+    (14) formal_params_list -> formal_params_list COMMA formal_param .
+
+    RPAREN          reduce using rule 14 (formal_params_list -> formal_params_list COMMA formal_param .)
+    COMMA           reduce using rule 14 (formal_params_list -> formal_params_list COMMA formal_param .)
+
+
+state 39
+
+    (11) feature -> ID LPAREN RPAREN COLON TYPE . LBRACE expression RBRACE
+
+    LBRACE          shift and go to state 58
+
+
+state 40
+
+    (17) expression -> ID .
+    (25) expression -> ID . ASSIGN expression
+    (32) expression -> ID . LPAREN arguments_list_opt RPAREN
+
+    DOT             reduce using rule 17 (expression -> ID .)
+    AT              reduce using rule 17 (expression -> ID .)
+    PLUS            reduce using rule 17 (expression -> ID .)
+    MINUS           reduce using rule 17 (expression -> ID .)
+    MULTIPLY        reduce using rule 17 (expression -> ID .)
+    DIVIDE          reduce using rule 17 (expression -> ID .)
+    LT              reduce using rule 17 (expression -> ID .)
+    LTEQ            reduce using rule 17 (expression -> ID .)
+    EQ              reduce using rule 17 (expression -> ID .)
+    SEMICOLON       reduce using rule 17 (expression -> ID .)
+    RPAREN          reduce using rule 17 (expression -> ID .)
+    THEN            reduce using rule 17 (expression -> ID .)
+    LOOP            reduce using rule 17 (expression -> ID .)
+    OF              reduce using rule 17 (expression -> ID .)
+    RBRACE          reduce using rule 17 (expression -> ID .)
+    COMMA           reduce using rule 17 (expression -> ID .)
+    ELSE            reduce using rule 17 (expression -> ID .)
+    POOL            reduce using rule 17 (expression -> ID .)
+    FI              reduce using rule 17 (expression -> ID .)
+    IN              reduce using rule 17 (expression -> ID .)
+    ASSIGN          shift and go to state 59
+    LPAREN          shift and go to state 60
+
+
+state 41
+
+    (12) feature -> ID COLON TYPE ASSIGN expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    SEMICOLON       reduce using rule 12 (feature -> ID COLON TYPE ASSIGN expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 42
+
+    (18) expression -> INTEGER .
+
+    DOT             reduce using rule 18 (expression -> INTEGER .)
+    AT              reduce using rule 18 (expression -> INTEGER .)
+    PLUS            reduce using rule 18 (expression -> INTEGER .)
+    MINUS           reduce using rule 18 (expression -> INTEGER .)
+    MULTIPLY        reduce using rule 18 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 18 (expression -> INTEGER .)
+    LT              reduce using rule 18 (expression -> INTEGER .)
+    LTEQ            reduce using rule 18 (expression -> INTEGER .)
+    EQ              reduce using rule 18 (expression -> INTEGER .)
+    SEMICOLON       reduce using rule 18 (expression -> INTEGER .)
+    RPAREN          reduce using rule 18 (expression -> INTEGER .)
+    THEN            reduce using rule 18 (expression -> INTEGER .)
+    LOOP            reduce using rule 18 (expression -> INTEGER .)
+    OF              reduce using rule 18 (expression -> INTEGER .)
+    RBRACE          reduce using rule 18 (expression -> INTEGER .)
+    COMMA           reduce using rule 18 (expression -> INTEGER .)
+    ELSE            reduce using rule 18 (expression -> INTEGER .)
+    POOL            reduce using rule 18 (expression -> INTEGER .)
+    FI              reduce using rule 18 (expression -> INTEGER .)
+    IN              reduce using rule 18 (expression -> INTEGER .)
+
+
+state 43
+
+    (19) expression -> BOOLEAN .
+
+    DOT             reduce using rule 19 (expression -> BOOLEAN .)
+    AT              reduce using rule 19 (expression -> BOOLEAN .)
+    PLUS            reduce using rule 19 (expression -> BOOLEAN .)
+    MINUS           reduce using rule 19 (expression -> BOOLEAN .)
+    MULTIPLY        reduce using rule 19 (expression -> BOOLEAN .)
+    DIVIDE          reduce using rule 19 (expression -> BOOLEAN .)
+    LT              reduce using rule 19 (expression -> BOOLEAN .)
+    LTEQ            reduce using rule 19 (expression -> BOOLEAN .)
+    EQ              reduce using rule 19 (expression -> BOOLEAN .)
+    SEMICOLON       reduce using rule 19 (expression -> BOOLEAN .)
+    RPAREN          reduce using rule 19 (expression -> BOOLEAN .)
+    THEN            reduce using rule 19 (expression -> BOOLEAN .)
+    LOOP            reduce using rule 19 (expression -> BOOLEAN .)
+    OF              reduce using rule 19 (expression -> BOOLEAN .)
+    RBRACE          reduce using rule 19 (expression -> BOOLEAN .)
+    COMMA           reduce using rule 19 (expression -> BOOLEAN .)
+    ELSE            reduce using rule 19 (expression -> BOOLEAN .)
+    POOL            reduce using rule 19 (expression -> BOOLEAN .)
+    FI              reduce using rule 19 (expression -> BOOLEAN .)
+    IN              reduce using rule 19 (expression -> BOOLEAN .)
+
+
+state 44
+
+    (20) expression -> STRING .
+
+    DOT             reduce using rule 20 (expression -> STRING .)
+    AT              reduce using rule 20 (expression -> STRING .)
+    PLUS            reduce using rule 20 (expression -> STRING .)
+    MINUS           reduce using rule 20 (expression -> STRING .)
+    MULTIPLY        reduce using rule 20 (expression -> STRING .)
+    DIVIDE          reduce using rule 20 (expression -> STRING .)
+    LT              reduce using rule 20 (expression -> STRING .)
+    LTEQ            reduce using rule 20 (expression -> STRING .)
+    EQ              reduce using rule 20 (expression -> STRING .)
+    SEMICOLON       reduce using rule 20 (expression -> STRING .)
+    RPAREN          reduce using rule 20 (expression -> STRING .)
+    THEN            reduce using rule 20 (expression -> STRING .)
+    LOOP            reduce using rule 20 (expression -> STRING .)
+    OF              reduce using rule 20 (expression -> STRING .)
+    RBRACE          reduce using rule 20 (expression -> STRING .)
+    COMMA           reduce using rule 20 (expression -> STRING .)
+    ELSE            reduce using rule 20 (expression -> STRING .)
+    POOL            reduce using rule 20 (expression -> STRING .)
+    FI              reduce using rule 20 (expression -> STRING .)
+    IN              reduce using rule 20 (expression -> STRING .)
+
+
+state 45
+
+    (21) expression -> SELF .
+
+    DOT             reduce using rule 21 (expression -> SELF .)
+    AT              reduce using rule 21 (expression -> SELF .)
+    PLUS            reduce using rule 21 (expression -> SELF .)
+    MINUS           reduce using rule 21 (expression -> SELF .)
+    MULTIPLY        reduce using rule 21 (expression -> SELF .)
+    DIVIDE          reduce using rule 21 (expression -> SELF .)
+    LT              reduce using rule 21 (expression -> SELF .)
+    LTEQ            reduce using rule 21 (expression -> SELF .)
+    EQ              reduce using rule 21 (expression -> SELF .)
+    SEMICOLON       reduce using rule 21 (expression -> SELF .)
+    RPAREN          reduce using rule 21 (expression -> SELF .)
+    THEN            reduce using rule 21 (expression -> SELF .)
+    LOOP            reduce using rule 21 (expression -> SELF .)
+    OF              reduce using rule 21 (expression -> SELF .)
+    RBRACE          reduce using rule 21 (expression -> SELF .)
+    COMMA           reduce using rule 21 (expression -> SELF .)
+    ELSE            reduce using rule 21 (expression -> SELF .)
+    POOL            reduce using rule 21 (expression -> SELF .)
+    FI              reduce using rule 21 (expression -> SELF .)
+    IN              reduce using rule 21 (expression -> SELF .)
+
+
+state 46
+
+    (22) expression -> LBRACE . block_list RBRACE
+    (23) block_list -> . block_list expression SEMICOLON
+    (24) block_list -> . expression SEMICOLON
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    block_list                     shift and go to state 70
+    expression                     shift and go to state 71
+    let_expression                 shift and go to state 50
+
+state 47
+
+    (40) expression -> LPAREN . expression RPAREN
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 72
+    let_expression                 shift and go to state 50
+
+state 48
+
+    (41) expression -> IF . expression THEN expression ELSE expression FI
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 73
+    let_expression                 shift and go to state 50
+
+state 49
+
+    (42) expression -> WHILE . expression LOOP expression POOL
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 74
+    let_expression                 shift and go to state 50
+
+state 50
+
+    (43) expression -> let_expression .
+
+    DOT             reduce using rule 43 (expression -> let_expression .)
+    AT              reduce using rule 43 (expression -> let_expression .)
+    PLUS            reduce using rule 43 (expression -> let_expression .)
+    MINUS           reduce using rule 43 (expression -> let_expression .)
+    MULTIPLY        reduce using rule 43 (expression -> let_expression .)
+    DIVIDE          reduce using rule 43 (expression -> let_expression .)
+    LT              reduce using rule 43 (expression -> let_expression .)
+    LTEQ            reduce using rule 43 (expression -> let_expression .)
+    EQ              reduce using rule 43 (expression -> let_expression .)
+    SEMICOLON       reduce using rule 43 (expression -> let_expression .)
+    RPAREN          reduce using rule 43 (expression -> let_expression .)
+    THEN            reduce using rule 43 (expression -> let_expression .)
+    LOOP            reduce using rule 43 (expression -> let_expression .)
+    OF              reduce using rule 43 (expression -> let_expression .)
+    RBRACE          reduce using rule 43 (expression -> let_expression .)
+    COMMA           reduce using rule 43 (expression -> let_expression .)
+    ELSE            reduce using rule 43 (expression -> let_expression .)
+    POOL            reduce using rule 43 (expression -> let_expression .)
+    FI              reduce using rule 43 (expression -> let_expression .)
+    IN              reduce using rule 43 (expression -> let_expression .)
+
+
+state 51
+
+    (49) expression -> CASE . expression OF actions_list ESAC
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 75
+    let_expression                 shift and go to state 50
+
+state 52
+
+    (53) expression -> NEW . TYPE
+
+    TYPE            shift and go to state 76
+
+
+state 53
+
+    (54) expression -> ISVOID . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 77
+    let_expression                 shift and go to state 50
+
+state 54
+
+    (55) expression -> INT_COMP . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 78
+    let_expression                 shift and go to state 50
+
+state 55
+
+    (56) expression -> NOT . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 79
+    let_expression                 shift and go to state 50
+
+state 56
+
+    (44) let_expression -> LET . let_variables_list IN expression
+    (45) let_variables_list -> . let_variables_list COMMA let_variable
+    (46) let_variables_list -> . let_variable
+    (47) let_variable -> . ID COLON TYPE
+    (48) let_variable -> . ID COLON TYPE ASSIGN expression
+
+    ID              shift and go to state 82
+
+    let_variables_list             shift and go to state 80
+    let_variable                   shift and go to state 81
+
+state 57
+
+    (10) feature -> ID LPAREN formal_params_list RPAREN COLON TYPE . LBRACE expression RBRACE
+
+    LBRACE          shift and go to state 83
+
+
+state 58
+
+    (11) feature -> ID LPAREN RPAREN COLON TYPE LBRACE . expression RBRACE
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 84
+    let_expression                 shift and go to state 50
+
+state 59
+
+    (25) expression -> ID ASSIGN . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 85
+    let_expression                 shift and go to state 50
+
+state 60
+
+    (32) expression -> ID LPAREN . arguments_list_opt RPAREN
+    (27) arguments_list_opt -> . arguments_list
+    (28) arguments_list_opt -> . empty
+    (29) arguments_list -> . arguments_list COMMA expression
+    (30) arguments_list -> . expression
+    (57) empty -> .
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    RPAREN          reduce using rule 57 (empty -> .)
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    arguments_list_opt             shift and go to state 86
+    arguments_list                 shift and go to state 87
+    empty                          shift and go to state 88
+    expression                     shift and go to state 89
+    let_expression                 shift and go to state 50
+
+state 61
+
+    (26) expression -> expression DOT . ID LPAREN arguments_list_opt RPAREN
+
+    ID              shift and go to state 90
+
+
+state 62
+
+    (31) expression -> expression AT . TYPE DOT ID LPAREN arguments_list_opt RPAREN
+
+    TYPE            shift and go to state 91
+
+
+state 63
+
+    (33) expression -> expression PLUS . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 92
+    let_expression                 shift and go to state 50
+
+state 64
+
+    (34) expression -> expression MINUS . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 93
+    let_expression                 shift and go to state 50
+
+state 65
+
+    (35) expression -> expression MULTIPLY . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 94
+    let_expression                 shift and go to state 50
+
+state 66
+
+    (36) expression -> expression DIVIDE . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 95
+    let_expression                 shift and go to state 50
+
+state 67
+
+    (37) expression -> expression LT . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 96
+    let_expression                 shift and go to state 50
+
+state 68
+
+    (38) expression -> expression LTEQ . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 97
+    let_expression                 shift and go to state 50
+
+state 69
+
+    (39) expression -> expression EQ . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 98
+    let_expression                 shift and go to state 50
+
+state 70
+
+    (22) expression -> LBRACE block_list . RBRACE
+    (23) block_list -> block_list . expression SEMICOLON
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    RBRACE          shift and go to state 99
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 100
+    let_expression                 shift and go to state 50
+
+state 71
+
+    (24) block_list -> expression . SEMICOLON
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    SEMICOLON       shift and go to state 101
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 72
+
+    (40) expression -> LPAREN expression . RPAREN
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    RPAREN          shift and go to state 102
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 73
+
+    (41) expression -> IF expression . THEN expression ELSE expression FI
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    THEN            shift and go to state 103
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 74
+
+    (42) expression -> WHILE expression . LOOP expression POOL
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    LOOP            shift and go to state 104
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 75
+
+    (49) expression -> CASE expression . OF actions_list ESAC
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    OF              shift and go to state 105
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 76
+
+    (53) expression -> NEW TYPE .
+
+    DOT             reduce using rule 53 (expression -> NEW TYPE .)
+    AT              reduce using rule 53 (expression -> NEW TYPE .)
+    PLUS            reduce using rule 53 (expression -> NEW TYPE .)
+    MINUS           reduce using rule 53 (expression -> NEW TYPE .)
+    MULTIPLY        reduce using rule 53 (expression -> NEW TYPE .)
+    DIVIDE          reduce using rule 53 (expression -> NEW TYPE .)
+    LT              reduce using rule 53 (expression -> NEW TYPE .)
+    LTEQ            reduce using rule 53 (expression -> NEW TYPE .)
+    EQ              reduce using rule 53 (expression -> NEW TYPE .)
+    SEMICOLON       reduce using rule 53 (expression -> NEW TYPE .)
+    RPAREN          reduce using rule 53 (expression -> NEW TYPE .)
+    THEN            reduce using rule 53 (expression -> NEW TYPE .)
+    LOOP            reduce using rule 53 (expression -> NEW TYPE .)
+    OF              reduce using rule 53 (expression -> NEW TYPE .)
+    RBRACE          reduce using rule 53 (expression -> NEW TYPE .)
+    COMMA           reduce using rule 53 (expression -> NEW TYPE .)
+    ELSE            reduce using rule 53 (expression -> NEW TYPE .)
+    POOL            reduce using rule 53 (expression -> NEW TYPE .)
+    FI              reduce using rule 53 (expression -> NEW TYPE .)
+    IN              reduce using rule 53 (expression -> NEW TYPE .)
+
+
+state 77
+
+    (54) expression -> ISVOID expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    PLUS            reduce using rule 54 (expression -> ISVOID expression .)
+    MINUS           reduce using rule 54 (expression -> ISVOID expression .)
+    MULTIPLY        reduce using rule 54 (expression -> ISVOID expression .)
+    DIVIDE          reduce using rule 54 (expression -> ISVOID expression .)
+    LT              reduce using rule 54 (expression -> ISVOID expression .)
+    LTEQ            reduce using rule 54 (expression -> ISVOID expression .)
+    EQ              reduce using rule 54 (expression -> ISVOID expression .)
+    SEMICOLON       reduce using rule 54 (expression -> ISVOID expression .)
+    RPAREN          reduce using rule 54 (expression -> ISVOID expression .)
+    THEN            reduce using rule 54 (expression -> ISVOID expression .)
+    LOOP            reduce using rule 54 (expression -> ISVOID expression .)
+    OF              reduce using rule 54 (expression -> ISVOID expression .)
+    RBRACE          reduce using rule 54 (expression -> ISVOID expression .)
+    COMMA           reduce using rule 54 (expression -> ISVOID expression .)
+    ELSE            reduce using rule 54 (expression -> ISVOID expression .)
+    POOL            reduce using rule 54 (expression -> ISVOID expression .)
+    FI              reduce using rule 54 (expression -> ISVOID expression .)
+    IN              reduce using rule 54 (expression -> ISVOID expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+
+  ! DOT             [ reduce using rule 54 (expression -> ISVOID expression .) ]
+  ! AT              [ reduce using rule 54 (expression -> ISVOID expression .) ]
+  ! PLUS            [ shift and go to state 63 ]
+  ! MINUS           [ shift and go to state 64 ]
+  ! MULTIPLY        [ shift and go to state 65 ]
+  ! DIVIDE          [ shift and go to state 66 ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 78
+
+    (55) expression -> INT_COMP expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    PLUS            reduce using rule 55 (expression -> INT_COMP expression .)
+    MINUS           reduce using rule 55 (expression -> INT_COMP expression .)
+    MULTIPLY        reduce using rule 55 (expression -> INT_COMP expression .)
+    DIVIDE          reduce using rule 55 (expression -> INT_COMP expression .)
+    LT              reduce using rule 55 (expression -> INT_COMP expression .)
+    LTEQ            reduce using rule 55 (expression -> INT_COMP expression .)
+    EQ              reduce using rule 55 (expression -> INT_COMP expression .)
+    SEMICOLON       reduce using rule 55 (expression -> INT_COMP expression .)
+    RPAREN          reduce using rule 55 (expression -> INT_COMP expression .)
+    THEN            reduce using rule 55 (expression -> INT_COMP expression .)
+    LOOP            reduce using rule 55 (expression -> INT_COMP expression .)
+    OF              reduce using rule 55 (expression -> INT_COMP expression .)
+    RBRACE          reduce using rule 55 (expression -> INT_COMP expression .)
+    COMMA           reduce using rule 55 (expression -> INT_COMP expression .)
+    ELSE            reduce using rule 55 (expression -> INT_COMP expression .)
+    POOL            reduce using rule 55 (expression -> INT_COMP expression .)
+    FI              reduce using rule 55 (expression -> INT_COMP expression .)
+    IN              reduce using rule 55 (expression -> INT_COMP expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+
+  ! DOT             [ reduce using rule 55 (expression -> INT_COMP expression .) ]
+  ! AT              [ reduce using rule 55 (expression -> INT_COMP expression .) ]
+  ! PLUS            [ shift and go to state 63 ]
+  ! MINUS           [ shift and go to state 64 ]
+  ! MULTIPLY        [ shift and go to state 65 ]
+  ! DIVIDE          [ shift and go to state 66 ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 79
+
+    (56) expression -> NOT expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    SEMICOLON       reduce using rule 56 (expression -> NOT expression .)
+    RPAREN          reduce using rule 56 (expression -> NOT expression .)
+    THEN            reduce using rule 56 (expression -> NOT expression .)
+    LOOP            reduce using rule 56 (expression -> NOT expression .)
+    OF              reduce using rule 56 (expression -> NOT expression .)
+    RBRACE          reduce using rule 56 (expression -> NOT expression .)
+    COMMA           reduce using rule 56 (expression -> NOT expression .)
+    ELSE            reduce using rule 56 (expression -> NOT expression .)
+    POOL            reduce using rule 56 (expression -> NOT expression .)
+    FI              reduce using rule 56 (expression -> NOT expression .)
+    IN              reduce using rule 56 (expression -> NOT expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+  ! DOT             [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! AT              [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! PLUS            [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! MINUS           [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! MULTIPLY        [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! DIVIDE          [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! LT              [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! LTEQ            [ reduce using rule 56 (expression -> NOT expression .) ]
+  ! EQ              [ reduce using rule 56 (expression -> NOT expression .) ]
+
+
+state 80
+
+    (44) let_expression -> LET let_variables_list . IN expression
+    (45) let_variables_list -> let_variables_list . COMMA let_variable
+
+    IN              shift and go to state 106
+    COMMA           shift and go to state 107
+
+
+state 81
+
+    (46) let_variables_list -> let_variable .
+
+    IN              reduce using rule 46 (let_variables_list -> let_variable .)
+    COMMA           reduce using rule 46 (let_variables_list -> let_variable .)
+
+
+state 82
+
+    (47) let_variable -> ID . COLON TYPE
+    (48) let_variable -> ID . COLON TYPE ASSIGN expression
+
+    COLON           shift and go to state 108
+
+
+state 83
+
+    (10) feature -> ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE . expression RBRACE
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 109
+    let_expression                 shift and go to state 50
+
+state 84
+
+    (11) feature -> ID LPAREN RPAREN COLON TYPE LBRACE expression . RBRACE
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    RBRACE          shift and go to state 110
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 85
+
+    (25) expression -> ID ASSIGN expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    SEMICOLON       reduce using rule 25 (expression -> ID ASSIGN expression .)
+    RPAREN          reduce using rule 25 (expression -> ID ASSIGN expression .)
+    THEN            reduce using rule 25 (expression -> ID ASSIGN expression .)
+    LOOP            reduce using rule 25 (expression -> ID ASSIGN expression .)
+    OF              reduce using rule 25 (expression -> ID ASSIGN expression .)
+    RBRACE          reduce using rule 25 (expression -> ID ASSIGN expression .)
+    COMMA           reduce using rule 25 (expression -> ID ASSIGN expression .)
+    ELSE            reduce using rule 25 (expression -> ID ASSIGN expression .)
+    POOL            reduce using rule 25 (expression -> ID ASSIGN expression .)
+    FI              reduce using rule 25 (expression -> ID ASSIGN expression .)
+    IN              reduce using rule 25 (expression -> ID ASSIGN expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+  ! DOT             [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! AT              [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! PLUS            [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! MINUS           [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! MULTIPLY        [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! DIVIDE          [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! LT              [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! LTEQ            [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+  ! EQ              [ reduce using rule 25 (expression -> ID ASSIGN expression .) ]
+
+
+state 86
+
+    (32) expression -> ID LPAREN arguments_list_opt . RPAREN
+
+    RPAREN          shift and go to state 111
+
+
+state 87
+
+    (27) arguments_list_opt -> arguments_list .
+    (29) arguments_list -> arguments_list . COMMA expression
+
+    RPAREN          reduce using rule 27 (arguments_list_opt -> arguments_list .)
+    COMMA           shift and go to state 112
+
+
+state 88
+
+    (28) arguments_list_opt -> empty .
+
+    RPAREN          reduce using rule 28 (arguments_list_opt -> empty .)
+
+
+state 89
+
+    (30) arguments_list -> expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    COMMA           reduce using rule 30 (arguments_list -> expression .)
+    RPAREN          reduce using rule 30 (arguments_list -> expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 90
+
+    (26) expression -> expression DOT ID . LPAREN arguments_list_opt RPAREN
+
+    LPAREN          shift and go to state 113
+
+
+state 91
+
+    (31) expression -> expression AT TYPE . DOT ID LPAREN arguments_list_opt RPAREN
+
+    DOT             shift and go to state 114
+
+
+state 92
+
+    (33) expression -> expression PLUS expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    PLUS            reduce using rule 33 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 33 (expression -> expression PLUS expression .)
+    LT              reduce using rule 33 (expression -> expression PLUS expression .)
+    LTEQ            reduce using rule 33 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 33 (expression -> expression PLUS expression .)
+    SEMICOLON       reduce using rule 33 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 33 (expression -> expression PLUS expression .)
+    THEN            reduce using rule 33 (expression -> expression PLUS expression .)
+    LOOP            reduce using rule 33 (expression -> expression PLUS expression .)
+    OF              reduce using rule 33 (expression -> expression PLUS expression .)
+    RBRACE          reduce using rule 33 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 33 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 33 (expression -> expression PLUS expression .)
+    POOL            reduce using rule 33 (expression -> expression PLUS expression .)
+    FI              reduce using rule 33 (expression -> expression PLUS expression .)
+    IN              reduce using rule 33 (expression -> expression PLUS expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+  ! DOT             [ reduce using rule 33 (expression -> expression PLUS expression .) ]
+  ! AT              [ reduce using rule 33 (expression -> expression PLUS expression .) ]
+  ! MULTIPLY        [ reduce using rule 33 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 33 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 63 ]
+  ! MINUS           [ shift and go to state 64 ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 93
+
+    (34) expression -> expression MINUS expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    PLUS            reduce using rule 34 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 34 (expression -> expression MINUS expression .)
+    LT              reduce using rule 34 (expression -> expression MINUS expression .)
+    LTEQ            reduce using rule 34 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 34 (expression -> expression MINUS expression .)
+    SEMICOLON       reduce using rule 34 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 34 (expression -> expression MINUS expression .)
+    THEN            reduce using rule 34 (expression -> expression MINUS expression .)
+    LOOP            reduce using rule 34 (expression -> expression MINUS expression .)
+    OF              reduce using rule 34 (expression -> expression MINUS expression .)
+    RBRACE          reduce using rule 34 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 34 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 34 (expression -> expression MINUS expression .)
+    POOL            reduce using rule 34 (expression -> expression MINUS expression .)
+    FI              reduce using rule 34 (expression -> expression MINUS expression .)
+    IN              reduce using rule 34 (expression -> expression MINUS expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+  ! DOT             [ reduce using rule 34 (expression -> expression MINUS expression .) ]
+  ! AT              [ reduce using rule 34 (expression -> expression MINUS expression .) ]
+  ! MULTIPLY        [ reduce using rule 34 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 34 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 63 ]
+  ! MINUS           [ shift and go to state 64 ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 94
+
+    (35) expression -> expression MULTIPLY expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    PLUS            reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    MINUS           reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    MULTIPLY        reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    DIVIDE          reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    LT              reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    LTEQ            reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    EQ              reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    SEMICOLON       reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    RPAREN          reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    THEN            reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    LOOP            reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    OF              reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    RBRACE          reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    COMMA           reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    ELSE            reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    POOL            reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    FI              reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    IN              reduce using rule 35 (expression -> expression MULTIPLY expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+
+  ! DOT             [ reduce using rule 35 (expression -> expression MULTIPLY expression .) ]
+  ! AT              [ reduce using rule 35 (expression -> expression MULTIPLY expression .) ]
+  ! PLUS            [ shift and go to state 63 ]
+  ! MINUS           [ shift and go to state 64 ]
+  ! MULTIPLY        [ shift and go to state 65 ]
+  ! DIVIDE          [ shift and go to state 66 ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 95
+
+    (36) expression -> expression DIVIDE expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    PLUS            reduce using rule 36 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 36 (expression -> expression DIVIDE expression .)
+    MULTIPLY        reduce using rule 36 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 36 (expression -> expression DIVIDE expression .)
+    LT              reduce using rule 36 (expression -> expression DIVIDE expression .)
+    LTEQ            reduce using rule 36 (expression -> expression DIVIDE expression .)
+    EQ              reduce using rule 36 (expression -> expression DIVIDE expression .)
+    SEMICOLON       reduce using rule 36 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 36 (expression -> expression DIVIDE expression .)
+    THEN            reduce using rule 36 (expression -> expression DIVIDE expression .)
+    LOOP            reduce using rule 36 (expression -> expression DIVIDE expression .)
+    OF              reduce using rule 36 (expression -> expression DIVIDE expression .)
+    RBRACE          reduce using rule 36 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 36 (expression -> expression DIVIDE expression .)
+    ELSE            reduce using rule 36 (expression -> expression DIVIDE expression .)
+    POOL            reduce using rule 36 (expression -> expression DIVIDE expression .)
+    FI              reduce using rule 36 (expression -> expression DIVIDE expression .)
+    IN              reduce using rule 36 (expression -> expression DIVIDE expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+
+  ! DOT             [ reduce using rule 36 (expression -> expression DIVIDE expression .) ]
+  ! AT              [ reduce using rule 36 (expression -> expression DIVIDE expression .) ]
+  ! PLUS            [ shift and go to state 63 ]
+  ! MINUS           [ shift and go to state 64 ]
+  ! MULTIPLY        [ shift and go to state 65 ]
+  ! DIVIDE          [ shift and go to state 66 ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 96
+
+    (37) expression -> expression LT expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    LT              reduce using rule 37 (expression -> expression LT expression .)
+    LTEQ            reduce using rule 37 (expression -> expression LT expression .)
+    EQ              reduce using rule 37 (expression -> expression LT expression .)
+    SEMICOLON       reduce using rule 37 (expression -> expression LT expression .)
+    RPAREN          reduce using rule 37 (expression -> expression LT expression .)
+    THEN            reduce using rule 37 (expression -> expression LT expression .)
+    LOOP            reduce using rule 37 (expression -> expression LT expression .)
+    OF              reduce using rule 37 (expression -> expression LT expression .)
+    RBRACE          reduce using rule 37 (expression -> expression LT expression .)
+    COMMA           reduce using rule 37 (expression -> expression LT expression .)
+    ELSE            reduce using rule 37 (expression -> expression LT expression .)
+    POOL            reduce using rule 37 (expression -> expression LT expression .)
+    FI              reduce using rule 37 (expression -> expression LT expression .)
+    IN              reduce using rule 37 (expression -> expression LT expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+  ! DOT             [ reduce using rule 37 (expression -> expression LT expression .) ]
+  ! AT              [ reduce using rule 37 (expression -> expression LT expression .) ]
+  ! PLUS            [ reduce using rule 37 (expression -> expression LT expression .) ]
+  ! MINUS           [ reduce using rule 37 (expression -> expression LT expression .) ]
+  ! MULTIPLY        [ reduce using rule 37 (expression -> expression LT expression .) ]
+  ! DIVIDE          [ reduce using rule 37 (expression -> expression LT expression .) ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 97
+
+    (38) expression -> expression LTEQ expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    LT              reduce using rule 38 (expression -> expression LTEQ expression .)
+    LTEQ            reduce using rule 38 (expression -> expression LTEQ expression .)
+    EQ              reduce using rule 38 (expression -> expression LTEQ expression .)
+    SEMICOLON       reduce using rule 38 (expression -> expression LTEQ expression .)
+    RPAREN          reduce using rule 38 (expression -> expression LTEQ expression .)
+    THEN            reduce using rule 38 (expression -> expression LTEQ expression .)
+    LOOP            reduce using rule 38 (expression -> expression LTEQ expression .)
+    OF              reduce using rule 38 (expression -> expression LTEQ expression .)
+    RBRACE          reduce using rule 38 (expression -> expression LTEQ expression .)
+    COMMA           reduce using rule 38 (expression -> expression LTEQ expression .)
+    ELSE            reduce using rule 38 (expression -> expression LTEQ expression .)
+    POOL            reduce using rule 38 (expression -> expression LTEQ expression .)
+    FI              reduce using rule 38 (expression -> expression LTEQ expression .)
+    IN              reduce using rule 38 (expression -> expression LTEQ expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+  ! DOT             [ reduce using rule 38 (expression -> expression LTEQ expression .) ]
+  ! AT              [ reduce using rule 38 (expression -> expression LTEQ expression .) ]
+  ! PLUS            [ reduce using rule 38 (expression -> expression LTEQ expression .) ]
+  ! MINUS           [ reduce using rule 38 (expression -> expression LTEQ expression .) ]
+  ! MULTIPLY        [ reduce using rule 38 (expression -> expression LTEQ expression .) ]
+  ! DIVIDE          [ reduce using rule 38 (expression -> expression LTEQ expression .) ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 98
+
+    (39) expression -> expression EQ expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    LT              reduce using rule 39 (expression -> expression EQ expression .)
+    LTEQ            reduce using rule 39 (expression -> expression EQ expression .)
+    EQ              reduce using rule 39 (expression -> expression EQ expression .)
+    SEMICOLON       reduce using rule 39 (expression -> expression EQ expression .)
+    RPAREN          reduce using rule 39 (expression -> expression EQ expression .)
+    THEN            reduce using rule 39 (expression -> expression EQ expression .)
+    LOOP            reduce using rule 39 (expression -> expression EQ expression .)
+    OF              reduce using rule 39 (expression -> expression EQ expression .)
+    RBRACE          reduce using rule 39 (expression -> expression EQ expression .)
+    COMMA           reduce using rule 39 (expression -> expression EQ expression .)
+    ELSE            reduce using rule 39 (expression -> expression EQ expression .)
+    POOL            reduce using rule 39 (expression -> expression EQ expression .)
+    FI              reduce using rule 39 (expression -> expression EQ expression .)
+    IN              reduce using rule 39 (expression -> expression EQ expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+  ! DOT             [ reduce using rule 39 (expression -> expression EQ expression .) ]
+  ! AT              [ reduce using rule 39 (expression -> expression EQ expression .) ]
+  ! PLUS            [ reduce using rule 39 (expression -> expression EQ expression .) ]
+  ! MINUS           [ reduce using rule 39 (expression -> expression EQ expression .) ]
+  ! MULTIPLY        [ reduce using rule 39 (expression -> expression EQ expression .) ]
+  ! DIVIDE          [ reduce using rule 39 (expression -> expression EQ expression .) ]
+  ! LT              [ shift and go to state 67 ]
+  ! LTEQ            [ shift and go to state 68 ]
+  ! EQ              [ shift and go to state 69 ]
+
+
+state 99
+
+    (22) expression -> LBRACE block_list RBRACE .
+
+    DOT             reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    AT              reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    PLUS            reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    MINUS           reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    MULTIPLY        reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    DIVIDE          reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    LT              reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    LTEQ            reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    EQ              reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    SEMICOLON       reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    RPAREN          reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    THEN            reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    LOOP            reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    OF              reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    RBRACE          reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    COMMA           reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    ELSE            reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    POOL            reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    FI              reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+    IN              reduce using rule 22 (expression -> LBRACE block_list RBRACE .)
+
+
+state 100
+
+    (23) block_list -> block_list expression . SEMICOLON
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    SEMICOLON       shift and go to state 115
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 101
+
+    (24) block_list -> expression SEMICOLON .
+
+    RBRACE          reduce using rule 24 (block_list -> expression SEMICOLON .)
+    ID              reduce using rule 24 (block_list -> expression SEMICOLON .)
+    INTEGER         reduce using rule 24 (block_list -> expression SEMICOLON .)
+    BOOLEAN         reduce using rule 24 (block_list -> expression SEMICOLON .)
+    STRING          reduce using rule 24 (block_list -> expression SEMICOLON .)
+    SELF            reduce using rule 24 (block_list -> expression SEMICOLON .)
+    LBRACE          reduce using rule 24 (block_list -> expression SEMICOLON .)
+    LPAREN          reduce using rule 24 (block_list -> expression SEMICOLON .)
+    IF              reduce using rule 24 (block_list -> expression SEMICOLON .)
+    WHILE           reduce using rule 24 (block_list -> expression SEMICOLON .)
+    CASE            reduce using rule 24 (block_list -> expression SEMICOLON .)
+    NEW             reduce using rule 24 (block_list -> expression SEMICOLON .)
+    ISVOID          reduce using rule 24 (block_list -> expression SEMICOLON .)
+    INT_COMP        reduce using rule 24 (block_list -> expression SEMICOLON .)
+    NOT             reduce using rule 24 (block_list -> expression SEMICOLON .)
+    LET             reduce using rule 24 (block_list -> expression SEMICOLON .)
+
+
+state 102
+
+    (40) expression -> LPAREN expression RPAREN .
+
+    DOT             reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    AT              reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    MULTIPLY        reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    LT              reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    LTEQ            reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    LOOP            reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    OF              reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    ELSE            reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    POOL            reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    FI              reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+    IN              reduce using rule 40 (expression -> LPAREN expression RPAREN .)
+
+
+state 103
+
+    (41) expression -> IF expression THEN . expression ELSE expression FI
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 116
+    let_expression                 shift and go to state 50
+
+state 104
+
+    (42) expression -> WHILE expression LOOP . expression POOL
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 117
+    let_expression                 shift and go to state 50
+
+state 105
+
+    (49) expression -> CASE expression OF . actions_list ESAC
+    (50) actions_list -> . actions_list action
+    (51) actions_list -> . action
+    (52) action -> . ID COLON TYPE ARROW expression SEMICOLON
+
+    ID              shift and go to state 120
+
+    actions_list                   shift and go to state 118
+    action                         shift and go to state 119
+
+state 106
+
+    (44) let_expression -> LET let_variables_list IN . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 121
+    let_expression                 shift and go to state 50
+
+state 107
+
+    (45) let_variables_list -> let_variables_list COMMA . let_variable
+    (47) let_variable -> . ID COLON TYPE
+    (48) let_variable -> . ID COLON TYPE ASSIGN expression
+
+    ID              shift and go to state 82
+
+    let_variable                   shift and go to state 122
+
+state 108
+
+    (47) let_variable -> ID COLON . TYPE
+    (48) let_variable -> ID COLON . TYPE ASSIGN expression
+
+    TYPE            shift and go to state 123
+
+
+state 109
+
+    (10) feature -> ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression . RBRACE
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    RBRACE          shift and go to state 124
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 110
+
+    (11) feature -> ID LPAREN RPAREN COLON TYPE LBRACE expression RBRACE .
+
+    SEMICOLON       reduce using rule 11 (feature -> ID LPAREN RPAREN COLON TYPE LBRACE expression RBRACE .)
+
+
+state 111
+
+    (32) expression -> ID LPAREN arguments_list_opt RPAREN .
+
+    DOT             reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    AT              reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    PLUS            reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    MINUS           reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    MULTIPLY        reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    DIVIDE          reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    LT              reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    LTEQ            reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    EQ              reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    SEMICOLON       reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    RPAREN          reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    THEN            reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    LOOP            reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    OF              reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    RBRACE          reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    COMMA           reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    ELSE            reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    POOL            reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    FI              reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+    IN              reduce using rule 32 (expression -> ID LPAREN arguments_list_opt RPAREN .)
+
+
+state 112
+
+    (29) arguments_list -> arguments_list COMMA . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 125
+    let_expression                 shift and go to state 50
+
+state 113
+
+    (26) expression -> expression DOT ID LPAREN . arguments_list_opt RPAREN
+    (27) arguments_list_opt -> . arguments_list
+    (28) arguments_list_opt -> . empty
+    (29) arguments_list -> . arguments_list COMMA expression
+    (30) arguments_list -> . expression
+    (57) empty -> .
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    RPAREN          reduce using rule 57 (empty -> .)
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 89
+    arguments_list_opt             shift and go to state 126
+    arguments_list                 shift and go to state 87
+    empty                          shift and go to state 88
+    let_expression                 shift and go to state 50
+
+state 114
+
+    (31) expression -> expression AT TYPE DOT . ID LPAREN arguments_list_opt RPAREN
+
+    ID              shift and go to state 127
+
+
+state 115
+
+    (23) block_list -> block_list expression SEMICOLON .
+
+    RBRACE          reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    ID              reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    INTEGER         reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    BOOLEAN         reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    STRING          reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    SELF            reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    LBRACE          reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    LPAREN          reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    IF              reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    WHILE           reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    CASE            reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    NEW             reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    ISVOID          reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    INT_COMP        reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    NOT             reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+    LET             reduce using rule 23 (block_list -> block_list expression SEMICOLON .)
+
+
+state 116
+
+    (41) expression -> IF expression THEN expression . ELSE expression FI
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    ELSE            shift and go to state 128
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 117
+
+    (42) expression -> WHILE expression LOOP expression . POOL
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    POOL            shift and go to state 129
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 118
+
+    (49) expression -> CASE expression OF actions_list . ESAC
+    (50) actions_list -> actions_list . action
+    (52) action -> . ID COLON TYPE ARROW expression SEMICOLON
+
+    ESAC            shift and go to state 130
+    ID              shift and go to state 120
+
+    action                         shift and go to state 131
+
+state 119
+
+    (51) actions_list -> action .
+
+    ESAC            reduce using rule 51 (actions_list -> action .)
+    ID              reduce using rule 51 (actions_list -> action .)
+
+
+state 120
+
+    (52) action -> ID . COLON TYPE ARROW expression SEMICOLON
+
+    COLON           shift and go to state 132
+
+
+state 121
+
+    (44) let_expression -> LET let_variables_list IN expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+  ! shift/reduce conflict for DOT resolved as shift
+  ! shift/reduce conflict for AT resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for LTEQ resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+    SEMICOLON       reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    RPAREN          reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    THEN            reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    LOOP            reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    OF              reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    RBRACE          reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    COMMA           reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    ELSE            reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    POOL            reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    FI              reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    IN              reduce using rule 44 (let_expression -> LET let_variables_list IN expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+  ! DOT             [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! AT              [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! PLUS            [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! MINUS           [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! MULTIPLY        [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! DIVIDE          [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! LT              [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! LTEQ            [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+  ! EQ              [ reduce using rule 44 (let_expression -> LET let_variables_list IN expression .) ]
+
+
+state 122
+
+    (45) let_variables_list -> let_variables_list COMMA let_variable .
+
+    IN              reduce using rule 45 (let_variables_list -> let_variables_list COMMA let_variable .)
+    COMMA           reduce using rule 45 (let_variables_list -> let_variables_list COMMA let_variable .)
+
+
+state 123
+
+    (47) let_variable -> ID COLON TYPE .
+    (48) let_variable -> ID COLON TYPE . ASSIGN expression
+
+    IN              reduce using rule 47 (let_variable -> ID COLON TYPE .)
+    COMMA           reduce using rule 47 (let_variable -> ID COLON TYPE .)
+    ASSIGN          shift and go to state 133
+
+
+state 124
+
+    (10) feature -> ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE .
+
+    SEMICOLON       reduce using rule 10 (feature -> ID LPAREN formal_params_list RPAREN COLON TYPE LBRACE expression RBRACE .)
+
+
+state 125
+
+    (29) arguments_list -> arguments_list COMMA expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    COMMA           reduce using rule 29 (arguments_list -> arguments_list COMMA expression .)
+    RPAREN          reduce using rule 29 (arguments_list -> arguments_list COMMA expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 126
+
+    (26) expression -> expression DOT ID LPAREN arguments_list_opt . RPAREN
+
+    RPAREN          shift and go to state 134
+
+
+state 127
+
+    (31) expression -> expression AT TYPE DOT ID . LPAREN arguments_list_opt RPAREN
+
+    LPAREN          shift and go to state 135
+
+
+state 128
+
+    (41) expression -> IF expression THEN expression ELSE . expression FI
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 136
+    let_expression                 shift and go to state 50
+
+state 129
+
+    (42) expression -> WHILE expression LOOP expression POOL .
+
+    DOT             reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    AT              reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    PLUS            reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    MINUS           reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    MULTIPLY        reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    DIVIDE          reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    LT              reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    LTEQ            reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    EQ              reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    SEMICOLON       reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    RPAREN          reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    THEN            reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    LOOP            reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    OF              reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    RBRACE          reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    COMMA           reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    ELSE            reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    POOL            reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    FI              reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+    IN              reduce using rule 42 (expression -> WHILE expression LOOP expression POOL .)
+
+
+state 130
+
+    (49) expression -> CASE expression OF actions_list ESAC .
+
+    DOT             reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    AT              reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    PLUS            reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    MINUS           reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    MULTIPLY        reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    DIVIDE          reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    LT              reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    LTEQ            reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    EQ              reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    SEMICOLON       reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    RPAREN          reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    THEN            reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    LOOP            reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    OF              reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    RBRACE          reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    COMMA           reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    ELSE            reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    POOL            reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    FI              reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+    IN              reduce using rule 49 (expression -> CASE expression OF actions_list ESAC .)
+
+
+state 131
+
+    (50) actions_list -> actions_list action .
+
+    ESAC            reduce using rule 50 (actions_list -> actions_list action .)
+    ID              reduce using rule 50 (actions_list -> actions_list action .)
+
+
+state 132
+
+    (52) action -> ID COLON . TYPE ARROW expression SEMICOLON
+
+    TYPE            shift and go to state 137
+
+
+state 133
+
+    (48) let_variable -> ID COLON TYPE ASSIGN . expression
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 138
+    let_expression                 shift and go to state 50
+
+state 134
+
+    (26) expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .
+
+    DOT             reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    AT              reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    PLUS            reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    MINUS           reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    MULTIPLY        reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    DIVIDE          reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    LT              reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    LTEQ            reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    EQ              reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    SEMICOLON       reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    RPAREN          reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    THEN            reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    LOOP            reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    OF              reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    RBRACE          reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    COMMA           reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    ELSE            reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    POOL            reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    FI              reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+    IN              reduce using rule 26 (expression -> expression DOT ID LPAREN arguments_list_opt RPAREN .)
+
+
+state 135
+
+    (31) expression -> expression AT TYPE DOT ID LPAREN . arguments_list_opt RPAREN
+    (27) arguments_list_opt -> . arguments_list
+    (28) arguments_list_opt -> . empty
+    (29) arguments_list -> . arguments_list COMMA expression
+    (30) arguments_list -> . expression
+    (57) empty -> .
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    RPAREN          reduce using rule 57 (empty -> .)
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 89
+    arguments_list_opt             shift and go to state 139
+    arguments_list                 shift and go to state 87
+    empty                          shift and go to state 88
+    let_expression                 shift and go to state 50
+
+state 136
+
+    (41) expression -> IF expression THEN expression ELSE expression . FI
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    FI              shift and go to state 140
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 137
+
+    (52) action -> ID COLON TYPE . ARROW expression SEMICOLON
+
+    ARROW           shift and go to state 141
+
+
+state 138
+
+    (48) let_variable -> ID COLON TYPE ASSIGN expression .
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    IN              reduce using rule 48 (let_variable -> ID COLON TYPE ASSIGN expression .)
+    COMMA           reduce using rule 48 (let_variable -> ID COLON TYPE ASSIGN expression .)
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 139
+
+    (31) expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt . RPAREN
+
+    RPAREN          shift and go to state 142
+
+
+state 140
+
+    (41) expression -> IF expression THEN expression ELSE expression FI .
+
+    DOT             reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    AT              reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    PLUS            reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    MINUS           reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    MULTIPLY        reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    DIVIDE          reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    LT              reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    LTEQ            reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    EQ              reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    SEMICOLON       reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    RPAREN          reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    THEN            reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    LOOP            reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    OF              reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    RBRACE          reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    COMMA           reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    ELSE            reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    POOL            reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    FI              reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+    IN              reduce using rule 41 (expression -> IF expression THEN expression ELSE expression FI .)
+
+
+state 141
+
+    (52) action -> ID COLON TYPE ARROW . expression SEMICOLON
+    (17) expression -> . ID
+    (18) expression -> . INTEGER
+    (19) expression -> . BOOLEAN
+    (20) expression -> . STRING
+    (21) expression -> . SELF
+    (22) expression -> . LBRACE block_list RBRACE
+    (25) expression -> . ID ASSIGN expression
+    (26) expression -> . expression DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> . expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (32) expression -> . ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> . expression PLUS expression
+    (34) expression -> . expression MINUS expression
+    (35) expression -> . expression MULTIPLY expression
+    (36) expression -> . expression DIVIDE expression
+    (37) expression -> . expression LT expression
+    (38) expression -> . expression LTEQ expression
+    (39) expression -> . expression EQ expression
+    (40) expression -> . LPAREN expression RPAREN
+    (41) expression -> . IF expression THEN expression ELSE expression FI
+    (42) expression -> . WHILE expression LOOP expression POOL
+    (43) expression -> . let_expression
+    (49) expression -> . CASE expression OF actions_list ESAC
+    (53) expression -> . NEW TYPE
+    (54) expression -> . ISVOID expression
+    (55) expression -> . INT_COMP expression
+    (56) expression -> . NOT expression
+    (44) let_expression -> . LET let_variables_list IN expression
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 42
+    BOOLEAN         shift and go to state 43
+    STRING          shift and go to state 44
+    SELF            shift and go to state 45
+    LBRACE          shift and go to state 46
+    LPAREN          shift and go to state 47
+    IF              shift and go to state 48
+    WHILE           shift and go to state 49
+    CASE            shift and go to state 51
+    NEW             shift and go to state 52
+    ISVOID          shift and go to state 53
+    INT_COMP        shift and go to state 54
+    NOT             shift and go to state 55
+    LET             shift and go to state 56
+
+    expression                     shift and go to state 143
+    let_expression                 shift and go to state 50
+
+state 142
+
+    (31) expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .
+
+    DOT             reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    AT              reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    PLUS            reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    MINUS           reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    MULTIPLY        reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    DIVIDE          reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    LT              reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    LTEQ            reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    EQ              reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    SEMICOLON       reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    RPAREN          reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    THEN            reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    LOOP            reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    OF              reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    RBRACE          reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    COMMA           reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    ELSE            reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    POOL            reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    FI              reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+    IN              reduce using rule 31 (expression -> expression AT TYPE DOT ID LPAREN arguments_list_opt RPAREN .)
+
+
+state 143
+
+    (52) action -> ID COLON TYPE ARROW expression . SEMICOLON
+    (26) expression -> expression . DOT ID LPAREN arguments_list_opt RPAREN
+    (31) expression -> expression . AT TYPE DOT ID LPAREN arguments_list_opt RPAREN
+    (33) expression -> expression . PLUS expression
+    (34) expression -> expression . MINUS expression
+    (35) expression -> expression . MULTIPLY expression
+    (36) expression -> expression . DIVIDE expression
+    (37) expression -> expression . LT expression
+    (38) expression -> expression . LTEQ expression
+    (39) expression -> expression . EQ expression
+
+    SEMICOLON       shift and go to state 144
+    DOT             shift and go to state 61
+    AT              shift and go to state 62
+    PLUS            shift and go to state 63
+    MINUS           shift and go to state 64
+    MULTIPLY        shift and go to state 65
+    DIVIDE          shift and go to state 66
+    LT              shift and go to state 67
+    LTEQ            shift and go to state 68
+    EQ              shift and go to state 69
+
+
+state 144
+
+    (52) action -> ID COLON TYPE ARROW expression SEMICOLON .
+
+    ESAC            reduce using rule 52 (action -> ID COLON TYPE ARROW expression SEMICOLON .)
+    ID              reduce using rule 52 (action -> ID COLON TYPE ARROW expression SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for DOT in state 121 resolved as shift
+WARNING: shift/reduce conflict for AT in state 121 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 121 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 121 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 121 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 121 resolved as shift
+WARNING: shift/reduce conflict for LT in state 121 resolved as shift
+WARNING: shift/reduce conflict for LTEQ in state 121 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 121 resolved as shift
